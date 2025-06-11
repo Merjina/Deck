@@ -4,8 +4,8 @@
   width: 100%;
   font-family: "Poppins", sans-serif;
   background-color: #F9F3EE;
-  background-image: url('D:\Frontend\deck\src\assets\images\pexels-fotoaibe-1643383.jpg'); /* Ensure correct image path */
-  background-repeat: no-repeat;
+ background-image: url('../assets/images/pexels-fotoaibe-1643383.jpg');
+ background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   color: #333333;
