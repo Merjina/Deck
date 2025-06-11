@@ -1,10 +1,10 @@
 import axios from "axios"; 
  
-const BASE_URL = "http://localhost:8080/api/auth"; // Your backend URL 
+const BASE_URL = "http://localhost:8081/api/auth"; // Your backend URL 
  
 export const registerUser = async (userData) => { 
   try { 
-    const response = await axios.post("http://localhost:8080/api/auth/signup", userData, { 
+    const response = await axios.post("http://localhost:8081/api/auth/signup", userData, { 
       headers: { "Content-Type": "application/json" }, 
     }); 
  
