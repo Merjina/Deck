@@ -1,0 +1,33 @@
+.footer {
+    background-color: #2C2C2C; /* Charcoal Gray for a softer dark theme */
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-text {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 8px;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+    color: #f0a500; /* Warm gold accent for hover effect */
+}
+
+.social-icon {
+    color: white;
+    font-size: 22px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icon:hover {
+    color: #f0a500; /* Gold hover effect */
+    transform: scale(1.2);
+}

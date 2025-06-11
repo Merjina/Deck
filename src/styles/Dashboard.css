@@ -1,0 +1,27 @@
+.admin-card {
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  min-height: 200px;
+  transition: transform 0.3s;
+}
+.admin-card:hover {
+  transform: scale(1.03);
+}
+
+.admin-icon {
+  color: #0dcaf0; /* you can change for product icon if needed */
+}
+
+.admin-icon {
+  color: #007bff;
+}
+
+.users-icon {
+  color: #17a2b8;
+}
+
+.products-icon {
+  color: #28a745;
+}

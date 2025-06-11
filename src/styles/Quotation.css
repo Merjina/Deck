@@ -1,0 +1,113 @@
+.admin-quotation .container {
+    max-width: 100%;
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .admin-quotation h2 {
+    color: #222;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  
+  .admin-quotation .table {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-quotation .table th,
+  .admin-quotation .table td {
+    text-align: center;
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    border: 1px solid #dee2e6;
+  }
+  
+  .admin-quotation .table th {
+    background-color: #001f3f;
+    color: #ffffff;
+  }
+  
+  .admin-quotation .table td {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  /* Buttons */
+  .admin-quotation .btn {
+    border: none;
+    padding: 6px 12px;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .admin-quotation .btn-approve {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .admin-quotation .btn-reject {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .admin-quotation .btn-pdf {
+    background-color: #17a2b8;
+    color: white;
+  }
+  
+  .admin-quotation .btn-delete {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .admin-quotation .btn:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+  
+  /* Status badges */
+  .admin-quotation .status-pending {
+    background-color: #ffc107;
+    color: black;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  
+  .admin-quotation .status-approved {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  
+  .admin-quotation .status-rejected {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  
+  /* Filter buttons */
+  .admin-quotation .filter-buttons .btn-filter {
+    margin: 0 8px;
+    background-color: #6c757d;
+    color: white;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 5px;
+  }
+  
+  .admin-quotation .filter-buttons .btn-filter.active {
+    background-color: #007bff;
+  }
+  

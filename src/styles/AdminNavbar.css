@@ -1,0 +1,43 @@
+.navbar {
+    background: #162447; /* Dark Navy Blue */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar a {
+    color: gold; /* Gold text to match logo */
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .navbar a:hover {
+    color: #FFD700; /* Brighter gold for hover effect */
+  }
+  
+  .search-box {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 250px;
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-profile span {
+    color: gold; /* Gold text */
+    font-weight: bold;
+  }
+  
+  .user-profile img {
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+  

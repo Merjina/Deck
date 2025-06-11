@@ -1,0 +1,52 @@
+/* Reviews.css */
+
+/* Style the star rating container */
+.stars {
+    display: flex;
+    direction: row;
+    font-size: 1.5rem;
+    color: #ccc;
+  }
+  
+  .star {
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .star.filled {
+    color: #ffd700; /* Gold color for filled stars */
+  }
+  
+  textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 1rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  button {
+    background-color: #4CAF50; /* Green button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+  }
+  
+  input[type="text"], input[type="email"] {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  

@@ -1,0 +1,67 @@
+/* General Page Styling */
+body {
+  background-color: #000;
+  color: white;
+}
+
+/* Navbar */
+.navbar-dark {
+  background-color: #000 !important;
+}
+
+.brand-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Product Section */
+.text-light {
+  color: white !important;
+}
+
+/* Product Grid */
+.product-card {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Product Image */
+.product-image {
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 1px solid #444;
+}
+
+/* Product Card Content */
+.product-card .card-body {
+  text-align: center;
+}
+
+.product-card h5 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* Buttons */
+.btn-warning {
+  background-color: #ff9900;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.btn-warning:hover {
+  background-color: #e68900;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-image {
+    height: 200px; /* Smaller images for mobile */
+  }
+}

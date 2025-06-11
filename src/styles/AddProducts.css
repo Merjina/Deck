@@ -1,0 +1,144 @@
+/* Main container */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Card styling */
+.admin-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+/* Title */
+.admin-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styling */
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+/* Products container - Ensuring horizontal layout */
+.products-container {
+  display: flex; /* Use flexbox for horizontal alignment */
+  flex-wrap: wrap; /* Wrap items if they exceed container width */
+  gap:15px;/* EXACT 2px gap between cards */
+  padding: 5px; /* Adjusted padding */
+  justify-content: center; /* Align items to center */
+  max-width: 1200px;
+}
+/* Table Styling */
+.products-table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Header */
+.products-table th {
+  background: #007bff;
+  color: rgb(25, 25, 25);
+  padding: 10px;
+  text-align: left;
+}
+
+/* Table Row */
+.products-table td {
+  padding:18px;
+  border-bottom: 1px solid #0a0a0a;
+}
+
+/* Small Image inside Table */
+.product-table-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Action Buttons */
+.edit-btn, .delete-btn {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.edit-btn {
+  background-color: #28a745;
+  color: rgb(57, 45, 45);
+  margin-right: 5px;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: rgb(47, 39, 39);
+}
+
+
+/* Faster insertion animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(5px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+

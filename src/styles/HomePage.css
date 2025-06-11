@@ -1,0 +1,55 @@
+body {
+  background-color: #000;
+  color: white;
+}
+
+.navbar-dark {
+  background-color: #000 !important;
+}
+
+.brand-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.carousel-caption-custom {
+  position: absolute;
+  bottom: 30%;
+  left: 10%;
+  text-align: left;
+}
+
+.carousel-caption-custom h1 {
+  font-size: 3rem;
+}
+
+.carousel-caption-custom p {
+  font-size: 1.2rem;
+}
+
+.service-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.service-card img {
+  height: 200px;
+  object-fit: cover;
+}
+/* Decrease Carousel Height */
+.carousel .carousel-item img {
+  height: 400px; /* Adjust height as needed */
+  object-fit: cover; /* Ensures the image covers the area properly */
+}
+
+/* Adjust Caption Position */
+.carousel-caption-custom {
+  bottom: 20px; /* Adjust to move captions up/down */
+}
+
+/* Responsive Height Adjustment */
+@media (max-width: 768px) {
+  .carousel .carousel-item img {
+    height: 300px; /* Smaller height for mobile */
+  }
+}

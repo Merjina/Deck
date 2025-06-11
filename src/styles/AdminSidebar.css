@@ -1,0 +1,67 @@
+.sidebar {
+  width: 220px;
+  background: #162447; /* Slightly darker navy blue */
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures logout stays at bottom */
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: gold; /* Gold heading */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background 0.3s;
+}
+
+.sidebar li:hover {
+  background: #1B263B; /* Match navbar */
+}
+
+.ullist {
+  text-decoration: none;
+}
+
+.sidebar a {
+  text-decoration: none; /* Removes the underline */
+  color: inherit; /* Inherits the default text color */
+  display: block; /* Makes the entire area clickable */
+  padding: 10px;
+}
+
+.sidebar a:hover {
+  color: #ff7f50; /* Change color on hover */
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #F44336; /* Red color */
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: auto;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #D32F2F; /* Darker red */
+}
