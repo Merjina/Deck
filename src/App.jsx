@@ -36,20 +36,20 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8081/api/cart")
+    axios.get("https://deckbackend-production.up.railway.app/api/cart")
       .then(response => setCartItems(response.data))
       .catch(error => console.error("Error fetching cart items:", error));
   }, []);
 
   const addToCart = (product) => {
-    axios.post("http://localhost:8081/api/cart/add", product)
+    axios.post("https://deckbackend-production.up.railway.app/api/cart/add", product)
       .then(() => axios.get("http://localhost:8080/api/cart"))
       .then(response => setCartItems(response.data))
       .catch(error => console.error("Error adding to cart:", error));
   };
 
   const removeFromCart = (id) => {
-    axios.delete(`http://localhost:8081/api/cart/remove/${id}`)
+    axios.delete(`https://deckbackend-production.up.railway.app/api/cart/remove/${id}`)
       .then(() => axios.get("http://localhost:8080/api/cart"))
       .then(response => setCartItems(response.data))
       .catch(error => console.error("Error removing from cart:", error));

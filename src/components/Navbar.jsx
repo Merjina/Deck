@@ -36,25 +36,6 @@ const Navbar1 = () => {
     }
   };
 
-  // const handleReviewChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setNewReview((prevState) => ({ ...prevState, [name]: value }));
-  // };
-
-  // const handleReviewSubmit = (e) => {
-  //   e.preventDefault();
-  //   const token = localStorage.getItem("token");
-  //   axios
-  //     .post("http://localhost:8081/api/reviews", newReview, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then(() => {
-  //       alert("Review submitted successfully!");
-  //       setShowReviewModal(false);
-  //       setNewReview({ rating: 0, comment: "" });
-  //     })
-  //     .catch(() => alert("Error submitting review."));
-  // };
 
   const handleSearch = (e) => {
     e.preventDefault();
