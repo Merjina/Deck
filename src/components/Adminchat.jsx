@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/Chat.css";
-import { BASE_URL } from "../api"; // ✅ Import the base URL
-
 const Adminchat = () => {
   const [reviews, setReviews] = useState([]);
 
@@ -12,7 +10,7 @@ const Adminchat = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/messages`);
+      const response = await axios.get(`https://deckbackend-production.up.railway.app/api/messages`);
       setReviews(response.data);
     } catch (error) {
       console.error("Error fetching messages:", error);

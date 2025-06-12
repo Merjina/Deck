@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Card, Row, Col, Container } from "react-bootstrap";
-import { FaBox, FaUsers, FaShoppingCart } from "react-icons/fa";
+import { FaBox, FaUsers, FaShoppingCart } from "react-icons/fa"; // Added FaShoppingCart for orders
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Dashboard.css";
 import axios from "axios";
-import { BASE_URL } from "../api"; // ✅ Base URL for deployment
 
 const Dashboard = () => {
   const location = useLocation();
@@ -13,15 +12,12 @@ const Dashboard = () => {
 
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
-  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0); // State to store total orders
 
-  const token = localStorage.getItem("token");
-
+  // Fetch total users
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/auth/all`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      .get("https://deckbackend-production.up.railway.app/api/auth/all")
       .then((response) => {
         const nonAdminUsers = response.data.filter(
           (user) => user.role !== "ADMIN"
@@ -29,34 +25,35 @@ const Dashboard = () => {
         setTotalUsers(nonAdminUsers.length);
       })
       .catch((error) => console.error("Error fetching users:", error));
-  }, [token]);
+  }, []);
 
+  // Fetch total products
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/products`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      .get("https://deckbackend-production.up.railway.app/api/products")
       .then((response) => {
         setTotalProducts(response.data.length);
       })
       .catch((error) => console.error("Error fetching products:", error));
-  }, [token]);
+  }, []);
 
+  // Fetch total orders
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/orders`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then((response) => {
-        setTotalOrders(response.data.length);
-      })
-      .catch((error) => console.error("Error fetching orders:", error));
-  }, [token]);
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("https://deckbackend-production.up.railway.app/api/orders");
+        setTotalOrders(response.data.length); // Set the total count of orders
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+    fetchOrders();
+  }, []);
 
   return (
     <div className="admin-container">
       <div className="admin-content text-dark">
-        <h1 style={{ textAlign: "center" }}>Welcome to Admin</h1>
+        <h1 style={{ marginLeft: "400px" }}>Welcome to Admin</h1>
         <Container className="mt-5">
           <Row className="justify-content-center gx-5 gy-4">
             <Col xs={12} md={5}>
@@ -81,7 +78,7 @@ const Dashboard = () => {
             </Col>
             <Col xs={12} md={5}>
               <Card className="admin-card text-center p-4">
-                <FaShoppingCart className="admin-icon orders-icon mb-3" size={40} />
+                <FaShoppingCart className="admin-icon orders-icon mb-3" size={40} /> {/* Added new icon */}
                 <h4>Total Orders</h4>
                 <p>{totalOrders}</p>
                 <Link to="/admin/orders" className="btn btn-info">

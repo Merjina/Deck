@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import "../styles/AdminContact.css";
-import { BASE_URL } from "../api"; // ✅ use deployed base URL
 
 const AdminContact = () => {
   const [messages, setMessages] = useState([]);
@@ -13,7 +12,7 @@ const AdminContact = () => {
 
   const fetchMessages = () => {
     axios
-      .get(`${BASE_URL}/contact/all`)
+      .get("https://deckbackend-production.up.railway.app/api/contact/all")
       .then((res) => setMessages(res.data))
       .catch((err) => console.error("Failed to fetch messages:", err));
   };
@@ -21,7 +20,7 @@ const AdminContact = () => {
   const handleApprove = (id) => {
     if (window.confirm("Are you sure you want to approve this message?")) {
       axios
-        .post(`${BASE_URL}/contact/${id}/approve`)
+        .post(`https://deckbackend-production.up.railway.app/api/contact/${id}/approve`)
         .then(() => {
           alert("Approved successfully.");
           fetchMessages();
@@ -37,7 +36,7 @@ const AdminContact = () => {
     const newStatus = prompt("Enter new approval status (PENDING, APPROVED, REJECTED):");
     if (newStatus) {
       axios
-        .put(`${BASE_URL}/contact/${id}/edit-approval`, null, {
+        .put(`https://deckbackend-production.up.railway.app/api/contact/${id}/edit-approval`, null, {
           params: { status: newStatus },
         })
         .then(() => {
@@ -55,7 +54,7 @@ const AdminContact = () => {
     const newDate = prompt("Enter new date (YYYY-MM-DD):", currentDate || "");
     if (newDate) {
       axios
-        .put(`${BASE_URL}/contact/${id}/edit-datetime`, {
+        .put(`https://deckbackend-production.up.railway.app/api/contact/${id}/edit-datetime`, {
           preferredDate: newDate,
         })
         .then(() => {
@@ -100,15 +99,15 @@ const AdminContact = () => {
                   >
                     Approve
                   </Button>
-                  <Button className="btn-edit" onClick={() => handleEditApproval(msg.id)}>
-                    Edit Status
+                  {/* <Button className="btn-edit" onClick={() => handleEditApproval(msg.id)}>
+                    Edit Approval
                   </Button>
                   <Button
                     variant="warning"
                     onClick={() => handleEditDate(msg.id, msg.preferredDate)}
                   >
                     Edit Date
-                  </Button>
+                  </Button> */}
                 </div>
               </Card.Body>
             </Card>

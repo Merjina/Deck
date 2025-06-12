@@ -6,8 +6,6 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
 
-import { BASE_URL } from "../api"; // Make sure BASE_URL ends with '/api/'
-
 const ContactUs = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
@@ -24,7 +22,7 @@ const ContactUs = () => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get(`${BASE_URL}auth/profile`, {
+        .get("https://deckbackend-production.up.railway.app/api/auth/profile", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setUser(res.data))
@@ -35,29 +33,33 @@ const ContactUs = () => {
   }, []);
 
   const handleChange = (e) => {
-    setFormData((fd) => ({ ...fd, [e.target.name]: e.target.value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const payload = {
       appointmentType: formData.appointmentType,
-      preferredDate: formData.date,
+      preferredDate: formData.date, // <-- this key must match the DTO field name
       startTime: formData.startTime,
       endTime: formData.endTime,
       message: formData.message,
       name: user.name,
       email: user.email,
-      phone: user.phone,
+      phone: user.phone
     };
-
+    
+  
+    console.log("Form Data to Submit:", payload);  // Check if date is included
+  
     try {
-      await axios.post(`${BASE_URL}contact/send`, payload, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      await axios.post("https://deckbackend-production.up.railway.app/api/contact/send", payload, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       setSuccess("Your message has been sent successfully!");
-      setError("");
       setFormData({
         appointmentType: "Online",
         date: "",
@@ -65,11 +67,11 @@ const ContactUs = () => {
         endTime: "",
         message: "",
       });
-    } catch {
-      setSuccess("");
+    } catch (err) {
       setError("Failed to send message. Please try again.");
     }
   };
+  
 
   return (
     <>
@@ -105,68 +107,42 @@ const ContactUs = () => {
               <h2 className="text-warning text-center">Send Us a Message</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               {success && <Alert variant="success">{success}</Alert>}
-
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                   <Form.Label>Name</Form.Label>
                   <Form.Control type="text" value={user.name || ""} disabled />
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="email" value={user.email || ""} disabled />
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Label>Phone</Form.Label>
                   <Form.Control type="text" value={user.phone || ""} disabled />
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Label>Appointment Type</Form.Label>
-                  <Form.Select
-                    name="appointmentType"
-                    value={formData.appointmentType}
-                    onChange={handleChange}
-                  >
+                  <Form.Select name="appointmentType" value={formData.appointmentType} onChange={handleChange}>
                     <option>Online</option>
                     <option>Offline</option>
                   </Form.Select>
                 </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Date</Form.Label>
-                  <Form.Control
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
+                <Form.Control
+  type="date"
+  name="date"
+  value={formData.date}
+  onChange={handleChange}
+  required
+/>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Start Time</Form.Label>
-                  <Form.Control
-                    type="time"
-                    name="startTime"
-                    value={formData.startTime}
-                    onChange={handleChange}
-                    required
-                  />
+                  <Form.Control type="time" name="startTime" value={formData.startTime} onChange={handleChange} required />
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Label>End Time</Form.Label>
-                  <Form.Control
-                    type="time"
-                    name="endTime"
-                    value={formData.endTime}
-                    onChange={handleChange}
-                    required
-                  />
+                  <Form.Control type="time" name="endTime" value={formData.endTime} onChange={handleChange} required />
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Label>Message</Form.Label>
                   <Form.Control
@@ -179,11 +155,8 @@ const ContactUs = () => {
                     required
                   />
                 </Form.Group>
-
                 <div className="text-center">
-                  <Button variant="warning" type="submit">
-                    Send Message
-                  </Button>
+                  <Button variant="warning" type="submit">Send Message</Button>
                 </div>
               </Form>
             </div>
@@ -197,9 +170,7 @@ const ContactUs = () => {
           <p className="lead text-light">
             We’re excited to help you with your design needs. Get in touch today!
           </p>
-          <Button variant="warning" size="lg">
-            Get in Touch
-          </Button>
+          <Button variant="warning" size="lg">Get in Touch</Button>
         </Container>
       </section>
 
