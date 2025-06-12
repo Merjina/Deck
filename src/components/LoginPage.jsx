@@ -10,28 +10,28 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setError(""); // Reset error message
-  
-    try {
-      const response = await axios.post("http://localhost:8081/api/auth/login", {
-        identifier,
-        password,
-      });
-  
-      const { token, role } = response.data; // Get token and role
-  
-      localStorage.setItem("token", token); // Store token for authentication
-  
-      if (role === "ADMIN") {
-        navigate("/admindash"); // Redirect to Admin dashboard
-      } else {
-        navigate("/home"); // Redirect to User home page
-      }
-    } catch (error) {
-      setError("Invalid email or password"); // Show error if login fails
+  e.preventDefault();
+  setError(""); // Reset error message
+
+  try {
+    const response = await axios.post("https://deckbackend-production.up.railway.app/api/auth/login", {
+      identifier,
+      password,
+    });
+
+    const { token, role } = response.data;
+
+    localStorage.setItem("token", token); // Store token
+
+    if (role === "ADMIN") {
+      navigate("/admindash");
+    } else {
+      navigate("/home");
     }
-  };
+  } catch (error) {
+    setError("Invalid email or password");
+  }
+};
 
   return (
     <div className="login-container">
