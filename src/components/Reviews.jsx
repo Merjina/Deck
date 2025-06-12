@@ -23,7 +23,7 @@ const Reviews = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/api/auth/profile", {
+      const response = await axios.get("https://deckbackend-production.up.railway.app/api/auth/profile", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -42,7 +42,7 @@ const Reviews = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/api/reviews");
+      const response = await axios.get("https://deckbackend-production.up.railway.app/api/reviews");
       setReviews(response.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -59,7 +59,7 @@ const Reviews = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8081/api/reviews", formData, {
+      await axios.post("https://deckbackend-production.up.railway.app/api/reviews", formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -22,7 +22,7 @@ const ProductDetails = () => {
   // 🔁 Fetch product
   useEffect(() => {
     axios
-      .get(`http://localhost:8081/api/products/${id}`)
+      .get(`https://deckbackend-production.up.railway.app/api/products/${id}`)
       .then((response) => setProduct(response.data))
       .catch((error) =>
         console.error("Error fetching product details:", error)
@@ -34,7 +34,7 @@ const ProductDetails = () => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("http://localhost:8081/api/auth/profile", {
+        .get("https://deckbackend-production.up.railway.app/api/auth/profile", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
@@ -58,7 +58,7 @@ const ProductDetails = () => {
     };
 
     axios
-      .post("http://localhost:8081/api/cart/add", cartItem, {
+      .post("https://deckbackend-production.up.railway.app/api/cart/add", cartItem, {
         headers: { "Content-Type": "application/json" },
       })
       .then(() => {
@@ -71,7 +71,7 @@ const ProductDetails = () => {
   const addToWishlist = () => {
     if (!product) return;
     axios
-      .post("http://localhost:8081/api/wishlist/add", {
+      .post("https://deckbackend-production.up.railway.app/api/wishlist/add", {
         productId: product.id,
         name: product.name,
         imagePath: product.imagePath,
@@ -102,7 +102,7 @@ const ProductDetails = () => {
         <Card className="bg-dark text-light product-detail-card">
           <Card.Img
             variant="top"
-            src={`http://localhost:8081/api/products/images/${product.imagePath}`}
+            src={`https://deckbackend-production.up.railway.app/api/products/images/${product.imagePath}`}
             onError={(e) => (e.target.src = "placeholder.jpg")}
             className="product-detail-image"
           />
@@ -160,12 +160,12 @@ const ProductDetails = () => {
                 console.log("🚀 Quotation Payload:", payload);
 
                 axios
-                  .post("http://localhost:8081/api/quotations/create", payload)
+                  .post("https://deckbackend-production.up.railway.app/api/quotations/create", payload)
                   .then((res) => {
                     alert("Quotation requested successfully! 📄");
 
                     const fileName = res.data.pdfFileName;
-                    const downloadUrl = `http://localhost:8081/api/quotations/pdf/${fileName}`;
+                    const downloadUrl = `https://deckbackend-production.up.railway.app/api/quotations/pdf/${fileName}`;
 
                     const link = document.createElement("a");
                     link.href = downloadUrl;

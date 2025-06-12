@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/AddProducts.css";
+import { BASE_URL } from "../api"; // ✅ Import base URL
 
 const AddProducts = () => {
   const [product, setProduct] = useState({
@@ -8,7 +9,7 @@ const AddProducts = () => {
     productId: "",
     description: "",
     price: "",
-    dimension: "", // ✅ Added dimension
+    dimension: "",
     image: null,
   });
 
@@ -21,7 +22,7 @@ const AddProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/products");
+      const response = await axios.get(BASE_URL);
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -61,7 +62,7 @@ const AddProducts = () => {
     formData.append("productId", product.productId);
     formData.append("description", product.description);
     formData.append("price", product.price);
-    formData.append("dimension", product.dimension); // ✅ Added dimension
+    formData.append("dimension", product.dimension);
     if (product.image) {
       formData.append("image", product.image);
     }
@@ -69,15 +70,13 @@ const AddProducts = () => {
     try {
       let response;
       if (editingProduct && editingProduct.id) {
-        response = await axios.put(
-          `http://localhost:8081/api/products/${editingProduct.id}`,
-          formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
+        response = await axios.put(`${BASE_URL}/${editingProduct.id}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
         alert("Product updated successfully!");
         setEditingProduct(null);
       } else {
-        response = await axios.post("http://localhost:8081/api/products", formData, {
+        response = await axios.post(BASE_URL, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         alert("Product added successfully!");
@@ -108,7 +107,7 @@ const AddProducts = () => {
       productId: item.productId,
       description: item.description,
       price: item.price,
-      dimension: item.dimension || "", // ✅ Add dimension in edit
+      dimension: item.dimension || "",
       image: null,
     });
     setEditingProduct(item);
@@ -121,7 +120,7 @@ const AddProducts = () => {
     }
 
     try {
-      const response = await axios.delete(`http://localhost:8081/api/products/${id}`);
+      const response = await axios.delete(`${BASE_URL}/${id}`);
       if (response.status === 200 || response.status === 204) {
         alert("Product deleted successfully!");
         fetchProducts();
@@ -151,7 +150,7 @@ const AddProducts = () => {
 
           <div className="form-group">
             <label>Product Description</label>
-            <textarea name="description" value={product.description} onChange={handleChange} required></textarea>
+            <textarea name="description" value={product.description} onChange={handleChange} required />
           </div>
 
           <div className="form-group">
@@ -175,7 +174,7 @@ const AddProducts = () => {
         </form>
       </div>
 
-      {/* Display Products in Table Format */}
+      {/* Products Table */}
       <div className="products-container">
         {products.length === 0 ? (
           <p>No products available</p>
@@ -187,18 +186,18 @@ const AddProducts = () => {
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th>Dimension</th> {/* ✅ Display dimension */}
+                <th>Dimension</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody className="text-dark">
+            <tbody>
               {products.map((item, index) => (
                 <tr key={item.id || `product-${index}`}>
                   <td>
                     <img
                       src={
                         item.imagePath
-                          ? `http://localhost:8081/api/products/images/${item.imagePath}`
+                          ? `${BASE_URL}/images/${item.imagePath}`
                           : "https://via.placeholder.com/50"
                       }
                       alt={item.name}
@@ -208,7 +207,7 @@ const AddProducts = () => {
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>₹{item.price}</td>
-                  <td>{item.dimension || "N/A"}</td> {/* ✅ Show dimension */}
+                  <td>{item.dimension || "N/A"}</td>
                   <td>
                     <button className="edit-btn" onClick={() => handleEdit(item)}>Edit</button>
                     <button className="delete-btn" onClick={() => handleDelete(item.id)}>Delete</button>

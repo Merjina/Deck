@@ -7,7 +7,7 @@ const Notification = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    axios.get("http://localhost:8081/api/contact/approved", {
+    axios.get("https://deckbackend-production.up.railway.app/api/contact/approved", {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setMessages(res.data))

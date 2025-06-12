@@ -22,13 +22,13 @@ const Wishlist = () => {
   }, []);
 
   const fetchWishlist = () => {
-    axios.get("http://localhost:8081/api/wishlist")
+    axios.get("https://deckbackend-production.up.railway.app/api/wishlist")
       .then(response => setWishlist(response.data))
       .catch(error => console.error("Error fetching wishlist:", error));
   };
 
   const removeFromWishlist = (productId) => {
-    axios.delete(`http://localhost:8081/api/wishlist/remove/${productId}`)
+    axios.delete(`https://deckbackend-production.up.railway.app/api/wishlist/remove/${productId}`)
       .then(() => {
         fetchWishlist();
         window.alert("Item removed from wishlist ❌");
@@ -37,7 +37,7 @@ const Wishlist = () => {
   };
 
   const moveToCart = (productId) => {
-    axios.post(`http://localhost:8081/api/cart/move-from-wishlist/${productId}`)
+    axios.post(`https://deckbackend-production.up.railway.app/api/cart/move-from-wishlist/${productId}`)
       .then(() => {
         fetchWishlist();
         window.alert("Item moved to cart! 🛒");
@@ -59,7 +59,7 @@ const Wishlist = () => {
                 <Card className="bg-dark text-light product-card">
                   <Card.Img 
                     variant="top" 
-                    src={item.imagePath.startsWith("http") ? item.imagePath : `http://localhost:8081/api/products/images/${item.imagePath}`}
+                    src={item.imagePath.startsWith("http") ? item.imagePath : `https://deckbackend-production.up.railway.app/api/products/images/${item.imagePath}`}
                     onError={(e) => e.target.src = "placeholder.jpg"} 
                     className="product-image"
                   />

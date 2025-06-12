@@ -13,8 +13,8 @@ const AdminQuotations = () => {
   const fetchQuotations = () => {
     const url =
       filterStatus === "ALL"
-        ? "http://localhost:8081/api/quotations"
-        : `http://localhost:8081/api/quotations/status/${filterStatus}`;
+        ? "https://deckbackend-production.up.railway.app/api/quotations"
+        : `https://deckbackend-production.up.railway.app/api/quotations/status/${filterStatus}`;
 
     axios
       .get(url)
@@ -25,7 +25,7 @@ const AdminQuotations = () => {
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this quotation?")) {
       axios
-        .delete(`http://localhost:8081/api/quotations/${id}`)
+        .delete(`https://deckbackend-production.up.railway.app/api/quotations/${id}`)
         .then(() => {
           fetchQuotations();
           alert("Quotation deleted.");
@@ -36,7 +36,7 @@ const AdminQuotations = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.post(`http://localhost:8081/api/quotations/${id}/approve`);
+      await axios.post(`https://deckbackend-production.up.railway.app/api/quotations/${id}/approve`);
       console.log("✅ Quotation approved!");
       fetchQuotations(); // Refresh the list safely
     } catch (err) {
@@ -52,7 +52,7 @@ const AdminQuotations = () => {
     const reason = prompt("Enter rejection reason:");
     if (reason) {
       axios
-        .post(`http://localhost:8081/api/quotations/${id}/reject`, null, {
+        .post(`https://deckbackend-production.up.railway.app/api/quotations/${id}/reject`, null, {
           params: { reason },
         })
         .then(() => {
@@ -66,7 +66,7 @@ const AdminQuotations = () => {
   };
 
   const handleDownload = (fileName) => {
-    const url = `http://localhost:8081/api/quotations/pdf/${fileName}`;
+    const url = `https://deckbackend-production.up.railway.app/api/quotations/pdf/${fileName}`;
     window.open(url, "_blank");
   };
 

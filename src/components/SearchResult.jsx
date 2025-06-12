@@ -14,7 +14,7 @@ const SearchResults = () => {
     if (location.state && location.state.query) {
       const fetchSearchResults = async () => {
         try {
-            const response = await axios.get(`http://localhost:8081/api/products/search?query=${location.state.query}`);
+            const response = await axios.get(`https://deckbackend-production.up.railway.app/api/products/search?query=${location.state.query}`);
             console.log(response.data); 
           setSearchResults(response.data);
         } catch (error) {

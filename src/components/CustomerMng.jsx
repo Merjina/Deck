@@ -4,12 +4,11 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import "../styles/Customers.css";
+import { BASE_URL } from "../api";
 
 function CustomerMng() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -18,8 +17,11 @@ function CustomerMng() {
   // Fetch all users from the backend
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/api/auth/all");
-      // Filter out admin users so they are not displayed
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${BASE_URL}/auth/all`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       const nonAdminUsers = response.data.filter(user => user.role !== "ADMIN");
       setUsers(nonAdminUsers);
     } catch (error) {
@@ -29,8 +31,11 @@ function CustomerMng() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8081/api/auth/delete/${id}`);
-      fetchUsers(); // Refresh users list
+      const token = localStorage.getItem("token");
+      await axios.delete(`${BASE_URL}/auth/delete/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      fetchUsers();
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -55,7 +60,6 @@ function CustomerMng() {
         </thead>
         <tbody>
           {users.map((user) => (
-            // Only non-admin users will appear because of the filter above
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>{user.name}</td>
@@ -70,8 +74,6 @@ function CustomerMng() {
           ))}
         </tbody>
       </Table>
-
-     
     </div>
   );
 }

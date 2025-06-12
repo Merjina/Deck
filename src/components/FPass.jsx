@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/LoginPage.css"; // Reusing styles from login page
+import { Link } from "react-router-dom";
+import "../styles/LoginPage.css";
+import { BASE_URL } from "../api"; // Make sure this is correctly pointing to your backend
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +21,7 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8081/api/auth/forgot-password", { email });
+      const response = await axios.post(`${BASE_URL}/auth/forgot-password`, { email });
 
       if (response.data.success) {
         setMessage("Password reset link sent! Check your email.");
@@ -27,7 +29,11 @@ const ForgotPassword = () => {
         setError("Email not found. Please enter a registered email.");
       }
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("An error occurred. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -57,8 +63,9 @@ const ForgotPassword = () => {
             {loading ? "Sending..." : "Send Reset Link"}
           </button>
         </form>
+        
         <p className="signup-text">
-          Remembered your password? <a href="/">Log In</a>
+          Remembered your password? <Link to="/">Log In</Link>
         </p>
       </div>
     </div>

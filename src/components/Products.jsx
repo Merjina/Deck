@@ -22,7 +22,7 @@ const Products = () => {
   // Fetch products and wishlist
   useEffect(() => {
     // Fetch all products from the backend
-    axios.get("http://localhost:8081/api/products")
+    axios.get("https://deckbackend-production.up.railway.app/api/products")
       .then(response => {
         setProducts(response.data);
         filterProducts(response.data, searchQuery);
@@ -55,7 +55,7 @@ const Products = () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    axios.get("http://localhost:8081/api/wishlist", {
+    axios.get("https://deckbackend-production.up.railway.app/api/wishlist", {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -77,7 +77,7 @@ const Products = () => {
       quantity: 1,
     };
 
-    axios.post("http://localhost:8081/api/cart/add", cartItem, {
+    axios.post("https://deckbackend-production.up.railway.app/api/cart/add", cartItem, {
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
@@ -99,7 +99,7 @@ const Products = () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    axios.post("http://localhost:8081/api/wishlist/add", {
+    axios.post("https://deckbackend-production.up.railway.app/api/wishlist/add", {
       productId: product.id,
       name: product.name,
       imagePath: product.imagePath,
@@ -136,7 +136,7 @@ const Products = () => {
                   <Link to={`/product/${product.id}`} className="text-decoration-none">
                     <Card.Img 
                       variant="top" 
-                      src={`http://localhost:8081/api/products/images/${product.imagePath}`} 
+                      src={`https://deckbackend-production.up.railway.app/api/products/images/${product.imagePath}`} 
                       onError={(e) => e.target.src = "placeholder.jpg"} 
                       className="product-image"
                     />

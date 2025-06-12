@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/Chat.css";
+import { BASE_URL } from "../api"; // ✅ Import the base URL
 
 const Adminchat = () => {
   const [reviews, setReviews] = useState([]);
-  const [replyText, setReplyText] = useState("");
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  const [selectedMessageId, setSelectedMessageId] = useState(null); // Store the selected message ID for reply
 
   useEffect(() => {
     fetchReviews();
@@ -14,13 +12,12 @@ const Adminchat = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/api/messages");
+      const response = await axios.get(`${BASE_URL}/messages`);
       setReviews(response.data);
     } catch (error) {
       console.error("Error fetching messages:", error);
     }
   };
-
 
   return (
     <div style={{ padding: "2rem" }} className="admin-chat">
@@ -31,12 +28,9 @@ const Adminchat = () => {
             <strong>{r.username}</strong>: {r.comment}
             <br />
             <small>Email: {r.email}</small>
-           
           </li>
         ))}
       </ul>
-
-     
     </div>
   );
 };

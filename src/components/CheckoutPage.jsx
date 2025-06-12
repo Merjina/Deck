@@ -5,12 +5,14 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import PaymentButton from "./PaymentButton";
+import { BASE_URL } from "../api"; // Use your centralized API base URL
 
 const CheckoutPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const quotation = location.state?.quotation;
+
   const cartItems =
     location.state?.cartItems ||
     (quotation
@@ -31,10 +33,13 @@ const CheckoutPage = () => {
   const [paymentSuccessful, setPaymentSuccessful] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
     axios
-      .get("http://localhost:8080/api/auth/profile", {
+      .get(`${BASE_URL}/auth/profile`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
@@ -72,7 +77,11 @@ const CheckoutPage = () => {
     };
 
     try {
-      await axios.post("http://localhost:8080/api/orders/place", orderData);
+      await axios.post(`${BASE_URL}/orders/place`, orderData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       alert("🎉 Order placed successfully!");
       navigate("/order-summary");
     } catch (error) {
@@ -90,8 +99,8 @@ const CheckoutPage = () => {
           <p className="text-warning">No items found for checkout.</p>
         ) : (
           <>
-            <Form>
-              <Form.Group>
+            <Form className="text-light">
+              <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
@@ -100,7 +109,7 @@ const CheckoutPage = () => {
                 />
               </Form.Group>
 
-              <Form.Group>
+              <Form.Group className="mb-3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
@@ -110,16 +119,17 @@ const CheckoutPage = () => {
                 />
               </Form.Group>
 
-              <Form.Group>
+              <Form.Group className="mb-3">
                 <Form.Label>Address</Form.Label>
                 <Form.Control
                   as="textarea"
+                  rows={2}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group>
+              <Form.Group className="mb-3">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   type="text"
@@ -128,7 +138,7 @@ const CheckoutPage = () => {
                 />
               </Form.Group>
 
-              <Form.Group>
+              <Form.Group className="mb-4">
                 <Form.Label>Pincode</Form.Label>
                 <Form.Control
                   type="text"
@@ -138,7 +148,7 @@ const CheckoutPage = () => {
               </Form.Group>
             </Form>
 
-            <h4 className="mt-4 text-light">Items:</h4>
+            <h4 className="text-light">Items:</h4>
             <ul className="text-light">
               {cartItems.map((item, index) => (
                 <li key={index}>
@@ -149,7 +159,7 @@ const CheckoutPage = () => {
 
             <h4 className="mt-3 text-success">Total: ₹{totalAmount.toFixed(2)}</h4>
 
-            <div className="p-3 bg-dark rounded">
+            <div className="p-3 bg-dark rounded mt-3">
               <PaymentButton
                 totalAmount={totalAmount}
                 onSuccess={() => setPaymentSuccessful(true)}

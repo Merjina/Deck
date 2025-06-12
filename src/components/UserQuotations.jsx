@@ -30,7 +30,7 @@ const UserQuotations = () => {
   useEffect(() => {
     const fetchQuotations = async () => {
       try {
-        const response = await axios.get("http://localhost:8081/api/quotations");
+        const response = await axios.get("https://deckbackend-production.up.railway.app/api/quotations");
         const userQuotations = response.data.filter(
           (q) => q.customerEmail === userEmail
         );

@@ -22,7 +22,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:8081/api/auth/profile", {
+        .get("https://deckbackend-production.up.railway.app/api/auth/profile", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => setUser(response.data))
@@ -40,7 +40,7 @@ const ProfilePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:8081/api/auth/update-profile", user, {
+      .put("https://deckbackend-production.up.railway.app/api/auth/update-profile", user, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {

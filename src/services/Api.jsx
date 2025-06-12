@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const BASE_URL = "https://deckbackend-production.up.railway.app/api/auth"; // ✅ Updated for deployment
+const BASE_URL = "https://deckbackend-production.up.railway.app/api/"; // ✅ Updated for deployment
 
 // REGISTER USER
 export const registerUser = async (userData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/signup`, userData, {
+    const response = await axios.post(`${BASE_URL}//auth/signup`, userData, {
       headers: { "Content-Type": "application/json" },
     });
 
@@ -19,7 +19,7 @@ export const registerUser = async (userData) => {
 // LOGIN USER
 export const loginUser = async (loginData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/login`, loginData, {
+    const response = await axios.post(`${BASE_URL}/auth/login`, loginData, {
       headers: { "Content-Type": "application/json" },
     });
 

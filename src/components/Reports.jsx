@@ -13,7 +13,7 @@ const Reports = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/api/reviews");
+      const response = await axios.get("https://deckbackend-production.up.railway.app/api/reviews");
       setReviews(response.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);

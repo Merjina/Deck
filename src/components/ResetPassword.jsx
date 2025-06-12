@@ -13,7 +13,7 @@ const ResetPassword = () => {
   const handleReset = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8081/api/auth/reset-password", {
+      const response = await axios.post("https://deckbackend-production.up.railway.app/api/auth/reset-password", {
         token,
         newPassword: password,
       });
