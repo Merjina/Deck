@@ -43,14 +43,14 @@ function App() {
 
   const addToCart = (product) => {
     axios.post("https://deckbackend-production.up.railway.app/api/cart/add", product)
-      .then(() => axios.get("http://localhost:8080/api/cart"))
+      .then(() => axios.get("https://deckbackend-production.up.railway.app/api/cart"))
       .then(response => setCartItems(response.data))
       .catch(error => console.error("Error adding to cart:", error));
   };
 
   const removeFromCart = (id) => {
     axios.delete(`https://deckbackend-production.up.railway.app/api/cart/remove/${id}`)
-      .then(() => axios.get("http://localhost:8080/api/cart"))
+      .then(() => axios.get("https://deckbackend-production.up.railway.app/api/cart"))
       .then(response => setCartItems(response.data))
       .catch(error => console.error("Error removing from cart:", error));
   };
