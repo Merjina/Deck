@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://deckbackend-production.up.railway.app/api/"; // ✅ Updated for deployment
+const BASE_URL = "https://deckbackend-production.up.railway.app/api"; // ✅ Updated for deployment
 
 // REGISTER USER
 export const registerUser = async (userData) => {
