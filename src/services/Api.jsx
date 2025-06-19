@@ -5,7 +5,7 @@ const BASE_URL = "https://deckbackend-production.up.railway.app/api/"; // ✅ Up
 // REGISTER USER
 export const registerUser = async (userData) => {
   try {
-    const response = await axios.post(`${BASE_URL}//auth/signup`, userData, {
+    const response = await axios.post(`${BASE_URL}/auth/signup`, userData, {
       headers: { "Content-Type": "application/json" },
     });
 
