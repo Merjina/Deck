@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { useState, useEffect } from "react";
 import axios from "axios";
 import './App.css';
+
 import LoginPage from './components/LoginPage';
 import SignUpPage from "./components/SignupPage";
 import HomePage from "./components/HomePage";
@@ -31,6 +32,15 @@ import Notification from "./components/Notification";
 import Reviews from "./components/Reviews";
 import Chat from "./components/Chat";
 import Adminchat from "./components/Adminchat";
+
+// ✅ Setup axios interceptor to add token automatically
+axios.interceptors.request.use(config => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -62,7 +72,6 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
        
         <Route path="/products" element={<ProductsPage addToCart={addToCart} />} />
         <Route path="/fpass" element={<ForgotPassword />} />
@@ -84,7 +93,7 @@ function App() {
 
         {/* Admin Panel */}
         <Route path="/admin" element={<AdminDash />}>
-        <Route path="contact" element={<AdminContact />} />
+          <Route path="contact" element={<AdminContact />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products" element={<AddProducts />} />
           <Route path="quotations" element={<Quotations />} />
@@ -92,7 +101,6 @@ function App() {
           <Route path="customers" element={<CustomerMng />} />
           <Route path="reports" element={<Reports />} />
           <Route path="chat" element={<Adminchat />} />
-        
           <Route path="settings" element={<Settings />} />
         </Route>
 

@@ -4,34 +4,34 @@ import "../styles/LoginPage.css";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [identifier, setIdentifier] = useState(""); // Stores email or phone
-  const [password, setPassword] = useState(""); // Stores password
-  const [error, setError] = useState(""); // Stores error messages
+  const [identifier, setIdentifier] = useState(""); 
+  const [password, setPassword] = useState(""); 
+  const [error, setError] = useState(""); 
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  setError(""); // Reset error message
+    e.preventDefault();
+    setError("");
 
-  try {
-    const response = await axios.post("https://deckbackend-production.up.railway.app/api/auth/login", {
-      identifier,
-      password,
-    });
+    try {
+      const response = await axios.post("https://deckbackend-production.up.railway.app/api/auth/login", {
+        identifier,
+        password,
+      });
 
-    const { token, role } = response.data;
+      const { token, role } = response.data;
 
-    localStorage.setItem("token", token); // Store token
+      localStorage.setItem("token", token); // ✅ save JWT
 
-    if (role === "ADMIN") {
-      navigate("/admindash");
-    } else {
-      navigate("/home");
+      if (role === "ADMIN") {
+        navigate("/admindash");
+      } else {
+        navigate("/home");
+      }
+    } catch (error) {
+      setError("Invalid email or password");
     }
-  } catch (error) {
-    setError("Invalid email or password");
-  }
-};
+  };
 
   return (
     <div className="login-container">
